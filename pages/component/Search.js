@@ -1,11 +1,16 @@
 import { useState } from 'react';
 
-function Search() {
+function Search({onSearch}) {
   const [textDestination, setTextDestination] = useState('');
+  const [textDeparture, setTextDepature] = useState('');
 
   const handleChange = (e) => {
     setTextDestination(e.target.value.toUpperCase());
   };
+
+  // const handleChangeDepart = (e) => {
+  //   setTextDepature(e.target.value.toUpperCase());
+  // }
 
   const handleKeyDown = (e) => {
     if (e.type === 'keydown' && e.code === 'Enter') {
@@ -17,13 +22,29 @@ function Search() {
     console.log('검색 버튼을 누르거나, 엔터를 치면 search 함수가 실행됩니다');
 
     // TODO: 지시에 따라 상위 컴포넌트에서 props를 받아서 실행시켜 보세요.
+    // onSearch({
+    //   'departure' : textDeparture,
+    //   'destination' : textDestination 
+    // })
+    onSearch({ textDeparture, textDestination })
   };
 
   return (
     <fieldset>
       <legend>공항 코드를 입력하고, 검색하세요</legend>
       <span>출발지</span>
-      <input id='input-departure' type='text' disabled value='ICN'></input>
+      <input 
+        id='input-departure'  
+        type='text' 
+        disabled value='ICN'></input>
+        {/* <input 
+        id='input-departure'  
+        type='text' 
+        onChange={handleChangeDepart}
+        placeholder='INC, GMP 중 하나를 입력하세요'
+        value={textDeparture}
+        onKeyDown={handleKeyDown}
+        ></input> */}
       <span>도착지</span>
       <input
         id='input-destination'
